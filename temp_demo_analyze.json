@@ -1,0 +1,82 @@
+{
+  "report_id": "19d5c07c-80b9-468c-ad7c-5fb91ec93920",
+  "extraction_method": "demo",
+  "extraction_confidence": 1.0,
+  "summary": "Your hemoglobin level is low, indicating anemia.",
+  "statistics": {
+    "total": 5,
+    "normal": 2,
+    "low": 1,
+    "high": 0,
+    "critical": 0,
+    "unknown": 2
+  },
+  "findings": [
+    {
+      "name": "Hemoglobin",
+      "value": 10.8,
+      "raw_value": "10.8",
+      "unit": "g/dL",
+      "reference_range": "13.0-17.0g/dL",
+      "status": "LOW",
+      "explanation": "Hemoglobin is the protein in red blood cells that carries oxygen from your lungs to the rest of your body, and it\u2019s a key indicator of overall blood health. Your result of 10.8 g/dL is below the normal range of 13.0\u201117.0 g/dL, meaning it\u2019s about 2 to 6 points lower than expected for most adults. With less hemoglobin, you may feel unusually tired, weak, or short of breath during everyday activities. Common everyday reasons for a low hemoglobin include not getting enough iron, vitamin B12, or folate in your diet, frequent menstrual bleeding, or chronic conditions that affect blood production.",
+      "possible_significance": "A low hemoglobin level is most often linked to iron\u2011deficiency anemia, but it can also be seen with vitamin B12 or folate deficiency, chronic kidney disease, or inflammatory disorders. In some cases, it may signal a more serious condition such as a bleeding ulcer or bone\u2011marrow problem, though these are less common.",
+      "doctor_questions": [
+        "Have you experienced heavy menstrual periods, frequent bleeding, or any recent injuries?",
+        "What does your typical diet look like, especially regarding iron\u2011rich foods and vitamin B12 sources?",
+        "Do you have any chronic illnesses (e.g., kidney disease, inflammatory conditions) or take medications that might affect blood production?"
+      ],
+      "sources": []
+    },
+    {
+      "name": "Glucose",
+      "value": 95.0,
+      "raw_value": "95",
+      "unit": "mg/dL",
+      "reference_range": "70-100mg/dL",
+      "status": "NORMAL",
+      "explanation": "",
+      "possible_significance": "",
+      "doctor_questions": [],
+      "sources": []
+    },
+    {
+      "name": "Creatinine",
+      "value": 1.1,
+      "raw_value": "1.1",
+      "unit": "mg/dL",
+      "reference_range": "0.7-1.3mg/dL",
+      "status": "NORMAL",
+      "explanation": "",
+      "possible_significance": "",
+      "doctor_questions": [],
+      "sources": []
+    },
+    {
+      "name": "TSH",
+      "value": 3.2,
+      "raw_value": "3.2",
+      "unit": "mIU/L",
+      "reference_range": "0.4-4.0mIU/L",
+      "status": "UNKNOWN",
+      "explanation": "",
+      "possible_significance": "",
+      "doctor_questions": [],
+      "sources": []
+    },
+    {
+      "name": "Cholesterol",
+      "value": 190.0,
+      "raw_value": "190",
+      "unit": "mg/dL",
+      "reference_range": "<200mg/dL",
+      "status": "UNKNOWN",
+      "explanation": "",
+      "possible_significance": "",
+      "doctor_questions": [],
+      "sources": []
+    }
+  ],
+  "sources": [],
+  "disclaimer": "MedExplain AI provides educational information and does not replace professional medical advice."
+}

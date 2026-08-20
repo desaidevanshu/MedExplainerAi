@@ -1,0 +1,30 @@
+Status: 200
+{
+  "answer": "You can lower your cholesterol by making a few everyday changes:\n\n1. **Eat smarter** \u2013 Choose foods low in saturated and trans fats (like lean meats, low\u2011fat dairy, and no\u2011fat or plant\u2011based milks). Fill half your plate with fruits, vegetables, whole grains, beans, and nuts. Add fish rich in omega\u20113s (such as salmon or sardines) a couple of times a week. Fiber\u2011rich foods (oats, barley, apples, carrots) can also help pull cholesterol out of your blood.\n\n2. **Watch your weight** \u2013 Even a modest weight loss can lower \u201cbad\u201d LDL cholesterol and raise \u201cgood\u201d HDL cholesterol.\n\n3. **Move more** \u2013 Aim for at least 150 minutes of moderate\u2011intensity activity (brisk walking, cycling, swimming) each week. Regular exercise helps you lose weight, lowers LDL, and raises HDL.\n\n4. **Quit smoking** \u2013 If you smoke, stopping can improve HDL levels and protect your heart.\n\n5. **Limit alcohol** \u2013 Keep drinks to moderate levels (up to one per day for women, up to two for men) because excess alcohol can raise total cholesterol.\n\n6. **Manage stress** \u2013 Chronic stress may affect hormone levels that influence cholesterol. Simple stress\u2011relief habits like deep breathing, yoga, or hobbies can be helpful.\n\nThese steps work together to improve your cholesterol numbers and support overall heart health. Talk with your health\u2011care provider about a plan that fits your lifestyle.",
+  "sources": [
+    {
+      "title": "Dietary Fats",
+      "source": "MedlinePlus"
+    },
+    {
+      "title": "Health Risks of an Inactive Lifestyle",
+      "source": "MedlinePlus"
+    },
+    {
+      "title": "Smoking and Heart Health",
+      "source": "MedlinePlus"
+    },
+    {
+      "title": "Stress and Health",
+      "source": "MedlinePlus"
+    },
+    {
+      "title": "Alcohol and Cholesterol",
+      "source": "MedlinePlus"
+    },
+    {
+      "title": "Familial Hypercholesterolemia",
+      "source": "MedlinePlus"
+    }
+  ]
+}

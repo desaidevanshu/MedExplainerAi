@@ -1,0 +1,19 @@
+2026-08-20 12:01:45 | INFO | LLM response length=13268
+2026-08-20 12:01:45 | INFO | Raw LLM output length=13268 (attempt 1)
+2026-08-20 12:01:45 | INFO | _extract_json: found matching brace at position 13267, JSON length=13268
+2026-08-20 12:01:45 | INFO | Extracted JSON length=13268 (attempt 1)
+2026-08-20 12:01:45 | INFO | Parsed JSON keys=['summary', 'overall_outcome', 'findings'], findings_count=12
+2026-08-20 12:01:45 | INFO | LLM response received.
+2026-08-20 12:01:45 | INFO | Analysis complete report_id=f5667b9a-b205-470d-8b69-8ad596011eec stats={'total': 45, 'normal': 29, 'low': 5, 'high': 8, 'critical': 0, 'unknown': 3}
+2026-08-20 12:02:23 | INFO | Calling LLM model=openai/gpt-oss-120b max_tokens=16384
+2026-08-20 12:02:23 | ERROR | LLM error status=413 body={"error":{"message":"Request too large for model `openai/gpt-oss-120b` in organization `org_01m05qzntjeydszczv7bf513bs` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 17973, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at http
+2026-08-20 12:02:23 | INFO | Chat raw LLM output: 
+2026-08-20 12:02:23 | INFO | _extract_json: no opening brace found
+2026-08-20 12:11:21 | INFO | Calling LLM model=openai/gpt-oss-120b max_tokens=16384
+2026-08-20 12:11:25 | ERROR | LLM error status=413 body={"error":{"message":"Request too large for model `openai/gpt-oss-120b` in organization `org_01m05qzntjeydszczv7bf513bs` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 17973, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at http
+2026-08-20 12:11:25 | INFO | Chat raw LLM output: 
+2026-08-20 12:11:25 | INFO | _extract_json: no opening brace found
+2026-08-20 12:11:56 | INFO | Calling LLM model=openai/gpt-oss-120b max_tokens=16384
+2026-08-20 12:11:56 | ERROR | LLM error status=413 body={"error":{"message":"Request too large for model `openai/gpt-oss-120b` in organization `org_01m05qzntjeydszczv7bf513bs` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 17334, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at http
+2026-08-20 12:11:56 | INFO | Chat raw LLM output: 
+2026-08-20 12:11:56 | INFO | _extract_json: no opening brace found
