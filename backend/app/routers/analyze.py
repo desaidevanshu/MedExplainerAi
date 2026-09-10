@@ -1,7 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from typing import Optional, List
 from app.models.schemas import AnalyzeRequest, AnalyzeResponse, ErrorResponse
 from app.services.analysis_service import analyze_report
 from app.utils.logger import get_logger
+from app.utils.auth import get_current_user
+from app.services.firestore_service import save_medical_report, get_medical_history, get_medical_report
+from fastapi import APIRouter, HTTPException, Depends
+import uuid
 
 router = APIRouter()
 logger = get_logger()
@@ -31,9 +35,32 @@ async def analyze_demo(language: str = "en"):
         raise HTTPException(status_code=500, detail="Demo analysis failed.")
 
 @router.post("/analyze", response_model=AnalyzeResponse)
-async def analyze(request: AnalyzeRequest):
+async def analyze(request: AnalyzeRequest, user: Optional[dict] = Depends(get_current_user)):
     try:
-        result = await analyze_report(file_id=request.file_id, language=request.language or "en")
+        result = await analyze_report(
+            file_id=request.file_id, 
+            language=request.language or "en",
+            target_report=request.target_report
+        )
+        
+        # Firestore saving logic
+        if user and user.get("uid"):
+            try:
+                # Need an ID for the report. Using file_id or a new UUID.
+                report_id = request.file_id or str(uuid.uuid4())
+                save_payload = result.dict() if hasattr(result, "dict") else result
+                
+                # Assign a server-side timestamp or ID mapping
+                import datetime
+                save_payload["created_at"] = datetime.datetime.utcnow().isoformat()
+                save_payload["report_id"] = report_id
+                
+                save_success = save_medical_report(user["uid"], report_id, save_payload)
+                if not save_success:
+                    logger.warning(f"Analysis completed but Firestore save failed for {report_id}")
+            except Exception as e:
+                logger.error(f"Error while attempting to save to Firestore: {e}")
+                
         return result
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="File not found.")
@@ -42,3 +69,28 @@ async def analyze(request: AnalyzeRequest):
     except Exception as e:
         logger.error(f"Analysis failed: {e}")
         raise HTTPException(status_code=500, detail="Analysis failed.")
+    finally:
+        if request.file_id:
+            import tempfile, glob, os
+            upload_dir = os.path.join(tempfile.gettempdir(), "medexplain_uploads")
+            for f in glob.glob(os.path.join(upload_dir, f"{request.file_id}.*")):
+                try:
+                    os.remove(f)
+                    logger.info(f"Cleaned up temporary file: {f}")
+                except Exception as del_err:
+                    logger.warning(f"Failed to cleanup temp file {f}: {del_err}")
+
+@router.get("/history")
+async def get_history(user: dict = Depends(get_current_user)):
+    if not user or not user.get("uid"):
+        raise HTTPException(status_code=401, detail="Authentication required to view history.")
+    return get_medical_history(user["uid"])
+
+@router.get("/history/{report_id}")
+async def get_report(report_id: str, user: dict = Depends(get_current_user)):
+    if not user or not user.get("uid"):
+        raise HTTPException(status_code=401, detail="Authentication required.")
+    report = get_medical_report(user["uid"], report_id)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return report

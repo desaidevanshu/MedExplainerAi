@@ -4,8 +4,10 @@ from pathlib import Path
 from fastapi import UploadFile
 from app.config import settings
 
+import tempfile
+
 async def save_upload_file(file: UploadFile, file_id: str) -> dict:
-    upload_dir = Path(settings.temp_upload_dir)
+    upload_dir = Path(tempfile.gettempdir()) / "medexplain_uploads"
     upload_dir.mkdir(parents=True, exist_ok=True)
     ext = Path(file.filename).suffix.lower()
     dest = upload_dir / f"{file_id}{ext}"

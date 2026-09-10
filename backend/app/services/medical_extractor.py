@@ -50,42 +50,48 @@ def extract_medical_tests(text: str) -> List[Dict]:
         r"(?P<name>[A-Za-z\s\(\)]+?)\s+(?P<value>-?\d+\.?\d*)\s*(?P<unit>[a-zA-Z/%µμ]*)\s*Reference\s+Range[:\s]+(?P<ref>[^\)\]\n]+)",
     ]
     seen = set()
-    for pattern in patterns:
-        for match in re.finditer(pattern, text, re.IGNORECASE):
-            name = match.group("name").strip().replace("\n", " ")
-            if "\n" in match.group("name"):
-                name = match.group("name").strip().split("\n")[-1]
-            if name.lower() in HEADERS:
-                continue
-            if _is_noise_name(name):
-                continue
-            value = float(match.group("value"))
-            unit = match.group("unit") if "unit" in match.groupdict() and match.group("unit") else ""
-            if "unit2" in match.groupdict() and match.group("unit2") and not unit:
-                unit = match.group("unit2")
-            if "ref" in match.groupdict() and match.group("ref"):
-                ref = match.group("ref").replace(" ", "").replace("\n", "").strip()
-            elif "ref_low" in match.groupdict() and "ref_high" in match.groupdict():
-                ref = f"{match.group('ref_low')}-{match.group('ref_high')}"
-            else:
-                ref = ""
-            key = (name.lower(), value, unit.lower())
-            if key in seen:
-                continue
-            seen.add(key)
-            status = classify_status(value, ref)
-            findings.append({
-                "name": name,
-                "value": value,
-                "raw_value": match.group("value"),
-                "unit": unit,
-                "reference_range": ref,
-                "status": status,
-                "explanation": "",
-                "possible_significance": "",
-                "doctor_questions": [],
-                "sources": [],
-            })
+    
+    # Run on both original text and a flattened space-normalized version (for OCR blocks)
+    text_flat = re.sub(r'\s*\n\s*', ' ', text)
+    texts_to_search = [text, text_flat]
+    
+    for search_text in texts_to_search:
+        for pattern in patterns:
+            for match in re.finditer(pattern, search_text, re.IGNORECASE):
+                name = match.group("name").strip().replace("\n", " ")
+                if "\n" in match.group("name"):
+                    name = match.group("name").strip().split("\n")[-1]
+                if name.lower() in HEADERS:
+                    continue
+                if _is_noise_name(name):
+                    continue
+                value = float(match.group("value"))
+                unit = match.group("unit") if "unit" in match.groupdict() and match.group("unit") else ""
+                if "unit2" in match.groupdict() and match.group("unit2") and not unit:
+                    unit = match.group("unit2")
+                if "ref" in match.groupdict() and match.group("ref"):
+                    ref = match.group("ref").replace(" ", "").replace("\n", "").strip()
+                elif "ref_low" in match.groupdict() and "ref_high" in match.groupdict():
+                    ref = f"{match.group('ref_low')}-{match.group('ref_high')}"
+                else:
+                    ref = ""
+                key = (name.lower(), value, unit.lower())
+                if key in seen:
+                    continue
+                seen.add(key)
+                status = classify_status(value, ref)
+                findings.append({
+                    "name": name,
+                    "value": value,
+                    "raw_value": match.group("value"),
+                    "unit": unit,
+                    "reference_range": ref,
+                    "status": status,
+                    "explanation": "",
+                    "possible_significance": "",
+                    "doctor_questions": [],
+                    "sources": [],
+                })
     return findings
 
 def classify_status(value: float, ref_range: str) -> str:

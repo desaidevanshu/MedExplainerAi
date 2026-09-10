@@ -17,9 +17,11 @@ class UploadResponse(BaseModel):
 class AnalyzeRequest(BaseModel):
     file_id: str
     language: Optional[str] = "en"
+    target_report: Optional[str] = None
 
 class Finding(BaseModel):
     name: str
+    section: Optional[str] = "General"
     value: Optional[float] = None
     raw_value: Optional[str] = None
     unit: Optional[str] = None
@@ -32,6 +34,7 @@ class Finding(BaseModel):
 
 class AnalyzeResponse(BaseModel):
     report_id: str
+    document_type: str = "Unknown Medical Report"
     extraction_method: str
     extraction_confidence: float
     summary: str

@@ -14,9 +14,10 @@ class Settings(BaseSettings):
     firebase_project_id: str = ""
     firebase_client_email: str = ""
     firebase_private_key: str = ""
+    firebase_credentials_path: str = ""
     firebase_database_url: str = ""
     cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:3000"
-    temp_upload_dir: str = str(Path(__file__).resolve().parent.parent.parent / "data" / "temp_uploads")
+    temp_upload_dir: str = "" # Deprecated - kept for .env backwards compatibility
     max_file_size_mb: int = 20
 
     @property

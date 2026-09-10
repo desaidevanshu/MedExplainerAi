@@ -1,0 +1,83 @@
+SHRADDHA
+AROGYA MANDIR
+ACCURIS
+I {asa3/+H7 "
+#d17Ar4:
+Pathology lab that
+cares
+Passport No
+LABORATORY TEST REPORT
+Patient Information
+Sample Information
+ClientlLocation Information
+Name
+Mr. Mukeshbhai
+Lab Id
+082661602616
+Client Name
+Shree Shraddha Institute of Medical Science
+Prabhudas Maniar
+Registration on
+2026 19.08
+Research Centre LLP@HLM
+Location
+SexlAge
+Male
+66 Y
+13-Sep-1959
+Collected at
+non
+Approved on
+22-Aug-2026 19.30
+Status
+Final
+Ref. Id
+Collected on
+2026 19.16
+Printed On
+23-Aug-2026 17.46
+Ref. By
+Patel MD
+Sample Type
+Serum
+Process At
+616_
+HLM SAWPL Shree Shraddha Institute
+Medical Science
+Research Centre LLP VAI
+Gujarat
+Test
+Result
+Unit
+Biological Ref. Interval
+ALT (SGPT)
+H 79.8
+UIL
+0 - 45
+AST (SGOT)
+109.9
+UIL
+35
+Bilirubin
+Total Bilirubin
+H 1.33
+mgldL
+0.2 - 1.3
+Azobilirubin chromophorcs
+Direct Bilirubin
+H 0.99
+mgldL
+0.1
+0.4
+Diazolizcd Sulfanilic Acid mcthod
+Indirect Bilirubin
+0.34
+0.1
+0.5
+Calculated
+End Of Report
+vapi
+Aug-
+Aug-
+Vinay
+mgldL

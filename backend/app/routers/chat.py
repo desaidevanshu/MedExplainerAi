@@ -11,7 +11,7 @@ logger = get_logger()
 @router.post("/chat")
 async def chat(request: ChatRequest):
     try:
-        context = get_rag_context(request.question)
+        context = ""
         llm_response = generate_chat_response(request.question, context, request.report_id, request.language or "en", request.history)
         final_response = safety_check(llm_response)
         return final_response

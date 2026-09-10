@@ -1,0 +1,6 @@
+{
+  "name": "MedExplain AI",
+  "description": "Calm, intelligent, and patient-friendly medical report explanation and lab analysis assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
