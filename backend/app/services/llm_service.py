@@ -50,7 +50,15 @@ def get_llm_status() -> str:
 def _call_openai(prompt: str, max_tokens: int = None) -> str:
     max_tokens = max_tokens or settings.llm_max_tokens
     # Unconditional Multi-Model Array to natively bypass strict TPM rate limits and Payload ceilings!
-    models_to_try = [settings.llm_model, "qwen/qwen3.8-27b", "gemma2-9b-it", "allam-2-7b", "openai/gpt-oss-20b"]
+    # Real Groq-supported model IDs — ordered by quality/size
+    models_to_try = [
+        settings.llm_model,           # primary from config (llama-3.3-70b-versatile)
+        "llama-3.1-70b-versatile",     # stable Llama 70B fallback
+        "llama3-70b-8192",             # Llama 3 70B
+        "mixtral-8x7b-32768",          # Mixtral fallback
+        "gemma2-9b-it",                # small but reliable
+        "llama3-8b-8192",              # last resort small model
+    ]
     api_key_header = f"Bearer {settings.openai_api_key}" if settings.openai_api_key else "Bearer none"
     
     for attempt, current_model in enumerate(models_to_try):
@@ -73,9 +81,9 @@ def _call_openai(prompt: str, max_tokens: int = None) -> str:
                     json=payload,
                 )
                 
-                # Natively bypass all Provider Limits by bouncing payloads sequentially!
-                if resp.status_code in [429, 413, 400]:
-                    logger.warning(f"Groq limits tripped on model {current_model} (Status {resp.status_code})! Dynamically bouncing to fallback array...")
+                # Bypass rate limits, capacity errors, and bad requests by trying next model
+                if resp.status_code in [429, 413, 400, 503, 502, 504]:
+                    logger.warning(f"Model {current_model} returned {resp.status_code}. Trying next fallback...")
                     continue
                     
                 if resp.status_code == 200:
@@ -90,8 +98,8 @@ def _call_openai(prompt: str, max_tokens: int = None) -> str:
                     logger.info(f"LLM response length={len(content)}")
                     return content
                 else:
-                    logger.error(f"LLM API Error {resp.status_code} body={str(resp.text[:200])}")
-                    break
+                    logger.error(f"LLM API Error {resp.status_code} on model {current_model}: {str(resp.text[:200])}")
+                    continue  # try next model instead of giving up
                     
         except Exception as e:
             logger.error(f"LLM execution halted natively: {e}")
